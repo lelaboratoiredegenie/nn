@@ -8,6 +8,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 import timeit
 import time
+from tqdm import tqdm
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
@@ -231,7 +232,7 @@ def train(model, encoder:du.Encoder.AbstractEncoder, trainDatasetX, trainDataset
     eps = 0.1
     
     epochs = 5000
-    for epoch in range(1, epochs+1):
+    for epoch in tqdm(range(1, epochs+1)):
         model.train()
         optimizer.zero_grad()
         # forward
@@ -242,8 +243,8 @@ def train(model, encoder:du.Encoder.AbstractEncoder, trainDatasetX, trainDataset
         loss.backward()
         optimizer.step()
 
-        if epoch % 100 == 0:
-            print(f'Epoch [{epoch}/{epochs}], Loss: {loss.item():.3f}')
+        # if epoch % 100 == 0:
+            # print(f'Epoch [{epoch}/{epochs}], Loss: {loss.item():.3f}')
         
         if epoch % epochs == 0:
             # validation_mapping
@@ -463,7 +464,7 @@ def __testing():
     }
     
     # choose config
-    config = conifgSample2  # conifgSample1 / conifgSample2 / conifgSample3
+    config = conifgSample3  # conifgSample1 / conifgSample2 / conifgSample3
     readSize = 10000 # use how many data in training and testing. integer, -1~10000
     trainDatasetFilePath = config['trainDatasetFilePath']
     testDatasetFilePath = config['testDatasetFilePath']
