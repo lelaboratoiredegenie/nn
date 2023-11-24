@@ -534,7 +534,7 @@ def __testing():
     
     # sample 3
     seed = 0
-    emb = 'PERFECT_TEXT'  # PERFECT / IMPERFECT / RANDOM / NONE / PERFECT_TEXT / IMPERFECT_TEXT
+    emb = 'NONE'  # PERFECT / IMPERFECT / RANDOM / NONE / PERFECT_TEXT / IMPERFECT_TEXT
     conifgSample3 = {
         'trainDatasetFilePath': f"dataset/sample3/train_seed{seed}_{emb}.dataset",
         'testDatasetFilePath': f"dataset/sample3/train_seed{seed}_{emb}.dataset",
@@ -615,13 +615,12 @@ def __testing():
     # transform data to tensor
     trainDatasetX = [torch.from_numpy(item).to(device=DEVICE) for item in trainDatasetX]
     testDatasetX = [torch.from_numpy(item).to(device=DEVICE) for item in testDatasetX]
-    # print(trainDatasetX[0])
-    # print(trainDatasetX.shape)
     # trainDatasetX shape = [readSize, encoder.getInputDim()]
+    
     trainDatasetY = [torch.from_numpy(item).to(device=DEVICE, dtype=torch.float) for item in trainDatasetY]
     testDatasetY = [torch.from_numpy(item).to(device=DEVICE, dtype=torch.float) for item in testDatasetY]
-    #print(trainDatasetY[0].shape)
     # trainDatasetY shape = [readSize, encoder.getOutputDim()] * 2
+    
     ''' Directly Dataset Read End '''
 
     # create NN model
