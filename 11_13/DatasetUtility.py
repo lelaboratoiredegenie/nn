@@ -352,7 +352,13 @@ class Encoder:
         
         def decode(self, encoded_entry:np.ndarray)->DatasetUtility.Entry:
             # not implemented now
-            pass
+            entry = DatasetUtility.Entry(self._inputSetSize, self._outputSetSize)
+            for idx, prob in enumerate(encoded_entry):
+                outputIndex = idx / self._outputSetSize
+                inputIndex = idx % self._outputSetSize
+                entry.putRelation(outputIndex, inputIndex, prob)
+                
+            return entry
         
         def getInputDim(self)->int:
             return self._inputSetSize
